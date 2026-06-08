@@ -124,6 +124,11 @@ button,
     filter: blur(18px);
 }
 
+.hero .container {
+    display: flex;
+    justify-content: center;
+}
+
 .hero-content {
     position: relative;
     z-index: 1;
