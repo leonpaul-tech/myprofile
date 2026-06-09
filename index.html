@@ -116,27 +116,27 @@
                     <h3>Portfolio Website</h3>
                     <p>Designed and developed a personal portfolio website to showcase academic skills, projects, and contact information using HTML and CSS.</p>
                     <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">Web Design</span>
+                        <button type="button" class="tag" data-description="Hypertext Markup Language structures content for the web and forms the foundation of every website. It defines headings, paragraphs, links, and images in a clear semantic layout.">HTML</button>
+                        <button type="button" class="tag" data-description="Cascading Style Sheets control a website’s appearance, styling text, spacing, colors, and layout across devices. It lets you create responsive design, animation, and polished visual presentation.">CSS</button>
+                        <button type="button" class="tag" data-description="Web design blends visual style, usability, and content structure to make websites attractive and easy to navigate. It focuses on user experience, responsive layout, and clear interactions.">Web Design</button>
                     </div>
                 </div>
                 <div class="project-card">
                     <h3>Programming Fundamentals Lab</h3>
                     <p>Completed programming assignments in C and Python focused on control structures, functions, and data handling.</p>
                     <div class="project-tags">
-                        <span class="tag">C</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">Algorithms</span>
+                        <button type="button" class="tag" data-description="C is a powerful low-level programming language used for system programming and performance-critical tasks. It teaches core concepts like memory management, pointers, and structured problem solving.">C</button>
+                        <button type="button" class="tag" data-description="Python is a versatile language for scripting, automation, and data work with a simple, readable syntax. It is widely used for building applications, analyzing data, and learning programming fundamentals.">Python</button>
+                        <button type="button" class="tag" data-description="Algorithms are step-by-step methods for solving problems efficiently and reliably. They are essential for organizing data, making calculations, and designing software logic.">Algorithms</button>
                     </div>
                 </div>
                 <div class="project-card">
                     <h3>Engineering Graphics Exercise</h3>
                     <p>Developed technical drawings and diagrams as part of first-year coursework, strengthening design communication skills.</p>
                     <div class="project-tags">
-                        <span class="tag">Engineering Graphics</span>
-                        <span class="tag">Drafting</span>
-                        <span class="tag">Visualization</span>
+                        <button type="button" class="tag" data-description="Engineering graphics communicates designs through clear technical drawings and diagrams. It helps convert ideas into precise plans for manufacturing and engineering projects.">Engineering Graphics</button>
+                        <button type="button" class="tag" data-description="Drafting is the practice of creating accurate technical drawings that show shapes, measurements, and assembly details. It ensures designs can be built and understood consistently.">Drafting</button>
+                        <button type="button" class="tag" data-description="Visualization turns complex ideas into clear graphics and diagrams for better understanding. It helps present technical information, data, and design concepts in a more intuitive way.">Visualization</button>
                     </div>
                 </div>
             </div>
@@ -171,5 +171,52 @@
             <p>&copy; 2026 Leon Paul. All rights reserved.</p>
         </div>
     </footer>
+
+    <div class="tag-modal-overlay" aria-hidden="true">
+        <div class="tag-modal" role="dialog" aria-modal="true" aria-labelledby="tag-modal-title">
+            <button class="tag-modal-close" aria-label="Close description">×</button>
+            <div class="tag-modal-header">
+                <span id="tag-modal-title" class="tag-modal-title">Topic Details</span>
+            </div>
+            <p class="tag-modal-text"></p>
+        </div>
+    </div>
+
+    <script>
+        const modalOverlay = document.querySelector('.tag-modal-overlay');
+        const modalTitle = document.querySelector('.tag-modal-title');
+        const modalText = document.querySelector('.tag-modal-text');
+        const modalClose = document.querySelector('.tag-modal-close');
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            modalOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        document.querySelectorAll('.tag').forEach(button => {
+            button.addEventListener('click', () => {
+                const description = button.dataset.description;
+                if (description) {
+                    modalTitle.textContent = button.textContent.trim();
+                    modalText.textContent = description;
+                    modalOverlay.classList.add('active');
+                    modalOverlay.setAttribute('aria-hidden', 'false');
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', event => {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
